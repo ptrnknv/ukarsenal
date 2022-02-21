@@ -1,28 +1,8 @@
-############################################################################
-#### Стандартный .htaccess для HTML сайтов                      0.1     ####
-############################################################################
-  # 1. Удалить www
-RewriteCond %{ENV:HTTPS} on
-  #Если включен https
-RewriteRule .* - [E=SSL:s]
-  #То создаем переменную  ssl с текстом s
-RewriteCond %{HTTP_HOST} ^www\.(.*) [NC]
-  # Проверяем, содержит ли домен www в начале URL.
-RewriteRule ^(.*)$ http%{ENV:SSL}://%1/$1 [R=301,L]
-  # Перенаправляем удаляем www
-
-  # 2. Добавить www
-#RewriteCond %{ENV:HTTPS} on
-  #Если включен https
-#RewriteRule .* - [E=SSL:s]
-  #То создаем переменную  ssl с текстом s
-#RewriteCond %{HTTP_HOST} !^www\.(.*) [NC]
-  # Если нет www в начале домена
-#RewriteRule ^(.*)$ http%{ENV:SSL}://www.%{HTTP_HOST}/$1 [R=301,L]
-  #Подставляем www и https если он включен.
-
-############################################################################
-#### Удаляем index.html из URL                                         ####
-############################################################################
-RewriteRule ^(.*)index\.html$ https://%{HTTP_HOST}/$1 [R=301,L]
-RewriteRule ^(.*)index\.htm$ https://%{HTTP_HOST}/$1 [R=301,L]
+RewriteEngine on
+RewriteBase /
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^.]+)\.html\ HTTP
+RewriteRule ^([^.]+)\.html$ http://your_site.ru/$1 [R=301,L]
+RewriteCond %{REQUEST_URI} !(\.[^./]+)$
+RewriteCond %{REQUEST_fileNAME} !-d
+RewriteCond %{REQUEST_fileNAME} !-f
+RewriteRule (.*) /$1.html [L]
