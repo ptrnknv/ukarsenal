@@ -2511,6 +2511,10 @@ body::after {
   background: #fff;
   opacity: 1;
 }
+.touch .swiper-button-prev,
+.touch .swiper-button-next {
+  display: none;
+}
 
 .swiper-button-prev {
   transform: rotate(-180deg);
