@@ -515,6 +515,7 @@
                 if (flsModules.popup) {
                     const popup = form.dataset.popupMessage;
                     popup ? flsModules.popup.open(popup) : null;
+                    if (document.documentElement.classList.contains("lock")) document.documentElement.classList.remove("lock");
                 }
             }), 0);
             formValidate.formClean(form);
